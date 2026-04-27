@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMI Calculator</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 400px;
+    background: #fff;
+    margin: 60px auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+  }
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+
+  button {
+    width: 95%;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  button:hover {
+    background: #0056b3;
+  }
+
+  .result {
+    margin-top: 20px;
+    font-size: 18px;
+    color: green;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>EMI Calculator</h2>
+
+  <input type="number" id="amount" placeholder="Loan Amount (₹)">
+  <input type="number" id="rate" placeholder="Interest Rate (%)">
+  <input type="number" id="months" placeholder="Tenure (Months)">
+
+  <button onclick="calculateEMI()">Calculate EMI</button>
+
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+function calculateEMI() {
+  let P = document.getElementById("amount").value;
+  let R = document.getElementById("rate").value / 12 / 100;
+  let N = document.getElementById("months").value;
+
+  if (P === "" || R === "" || N === "") {
+    document.getElementById("result").innerHTML = "Please fill all fields";
+    return;
+  }
+
+  let EMI = (P * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
+
+  document.getElementById("result").innerHTML =
+    "Monthly EMI: ₹ " + EMI.toFixed(2);
+}
+</script>
+
+</body>
+</html>
